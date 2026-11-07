@@ -1,0 +1,37 @@
+Notes:
+In this sample app, the Claude agent defined in app.py is run in a container
+(i.e., Docker Desktop).
+To access the claude-agent-api from localhost:8000, a "chat" function
+is created (refer - app.py). The chat function corresponds to an instance of
+FastAPI, and it accepts a POST request.
+The chat function calls query function of the Claude Agent SDK to connect to
+the MS Learn MCP Server to answer user query passed to the chat function with
+the help of tools supplied to the query function.
+
+Docker configuration is present in the docker-compose.yml file. Dockerfile
+contains commands to set up the Docker container application, claude-agent-api,
+by installing the required libs mentioned in the requirements.txt.
+
+Follow the instructions to run the Docker, build the claude-agent-api, send
+queries to the agent, and get response from the MS Learn MCP Server.
+1. Open the Docker Desktop application to start Docker daemon which provides
+runtime environment for claude-agent-api container application.
+2. Then open claude-agent-api in integrated terminal to run the following commands.
+3. Command in terminal: docker compose build
+4. Once the Docker application, claude-agent-api is built successfully (which can
+   be verified both in the terminal and the Builds section in the Docker Desktop),
+   run the following command to make the build up and running in the Docker container
+   environment.
+   Command in terminal: docker compose up
+5. Now, go to a web browser and launch http://localhost:8000/chat to verify that
+   the agent is running properly. As the web browser sends GET reqest and chat
+   funciton only supports POST request (as defined in the app.py), you would see
+   "Method not allowed".
+6. To test the chat interface of the agent, go to http://localhost:8000/docs.
+   It opens a Swagger UI.
+7. Then expand the /chat end-point, click "Try It Out" button to enter relevant
+   prompt query sting (e.g., "Please give me some sample code snippets for Azure
+   cosmosdb with Python SDK from MS Learn MCP Server."). Next click "Execute"
+   button.
+8. Check the server response below the query.
+
